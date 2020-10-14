@@ -78,7 +78,11 @@ class GenProxiedClassFileHelper extends ClassFile
     public function handleEnterFuncCall(&$node)
     {
         assert($node instanceof Node\Expr\FuncCall);
-        $node->name =  $this->renderFunName($node->name,$this->t_covertFuns);
+        if($node->name instanceof Node\Expr\Variable){
+            // not support anonymous function
+        }else{
+            $node->name =  $this->renderFunName($node->name,$this->t_covertFuns);
+        }
         return $node;
     }
 
