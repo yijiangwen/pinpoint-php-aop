@@ -77,7 +77,7 @@ class PinpointDriver
         $this->classMap = $classMap;
 
         /// checking the cached file exist, if exist load it
-        if(!$this->classMap->updateSelf())
+        if($this->classMap->useCache())
         {
             PinpointClassLoader::init($classMap);
             return ;
@@ -85,10 +85,8 @@ class PinpointDriver
 
 
         $pluFiles = static::getAutoGenPlugins();
-//        $pluParsers = [];
         foreach ($pluFiles as $file)
         {
-//            $pluParsers[] = new PluginParser($file,$this->clAr);
             new PluginParser($file,$this->clAr);
         }
         /// there hidden a duplicated visit, class locates in @hook and appendFiles.

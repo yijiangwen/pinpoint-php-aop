@@ -29,17 +29,17 @@ class AopClassMap
 
     }
 
-    public function updateSelf()
+    public function useCache()
     {
-        if( ( !defined('PINPOINT_USE_CACHE') ||
-            stristr(PINPOINT_USE_CACHE,"NO") === false ) &&
+        if( ( defined('PINPOINT_USE_CACHE') &&
+            stristr(PINPOINT_USE_CACHE,"YES") === true ) &&
             file_exists($this->index_file_path) )
         {
             $this->classLoaderMap = unserialize(file_get_contents($this->index_file_path));
             $this->cached = true;
-            return false;
-        }else{
             return true;
+        }else{
+            return false;
         }
     }
 
