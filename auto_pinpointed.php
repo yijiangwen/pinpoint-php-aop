@@ -17,6 +17,7 @@ define('CLASS_PREFIX','Proxied_');
 
 PinpointDriver::getInstance()->init($classMap);
 
-if(class_exists("\Plugins\PerRequestPlugins")){
-    \Plugins\PerRequestPlugins::instance();
+if(class_exists(PP_REQ_PLUGINS)){
+    $plugins = PP_REQ_PLUGINS;
+    $plugins::instance();
 }
